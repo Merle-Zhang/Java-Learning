@@ -106,7 +106,10 @@ public class JunglePark extends PApplet {
             break; // remove the first animal which the mouse is over it while the r-key is pressed
           }
         }
-
+        break;
+      case 'D':
+        listGUI.add(new Deer(this));
+        break;
     }
 
   }
