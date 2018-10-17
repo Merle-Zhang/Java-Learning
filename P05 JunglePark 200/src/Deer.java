@@ -30,7 +30,7 @@ public class Deer extends Animal {
   // Checks if there is a threat (a Tiger for instance) at the neighborhood
   // scanRange is an integer that represents the range of the area to be scanned around the animal
   public boolean scanForThreat(int scanRange) {
-    for (ParkGUI itm : super.processing.listGUI) {
+    for (ParkGUI itm : this.processing.listGUI) {
       if (itm instanceof Tiger && this.distance((Animal) itm) <= scanRange) {
         return true;
       }
@@ -42,6 +42,10 @@ public class Deer extends Animal {
   // Defines the behavior of a Deer object in the Jungle park
   @Override
   public void action() {
-
+    if (this.scanForThreat(SCAN_RANGE)) {
+      this.processing.fill(0); // specify font color: black
+      this.processing.text("THREAT!", this.getPositionX(),
+          this.getPositionY() - this.image.height / 2 - 4);
+    }
   }
 }

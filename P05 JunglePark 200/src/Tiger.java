@@ -15,7 +15,7 @@ public class Tiger extends Animal {
   // Tiger's identification fields
   private static final String TYPE = "TGR"; // A String that represents the tiger type
   private final int id; // Tiger's id: positive number that represents the order of the tiger
-
+  private int deerEatenCount; // Number of Deers that the current tiger has eaten so far
 
   /**
    * Creates a new Tiger object positioned at a random position of the display window
@@ -30,8 +30,24 @@ public class Tiger extends Animal {
     id = nextID;
     this.label = TYPE + id; // String that identifies the current tiger
     nextID++;
+    deerEatenCount = 0;
   }
 
+  /**
+   * Accessor for deerEatenCount
+   * @return this.deerEatenCount
+   */
+  public int getDeerEatenCount() {
+    return this.deerEatenCount;
+  }
+ 
+  /**
+   * 
+   * @param food
+   */
+  public void hop(Deer food) {
+
+  }
 
   /**
    * Tiger's behavior in the Jungle Park Scans for food at the neighborhood of the current tiger. If
