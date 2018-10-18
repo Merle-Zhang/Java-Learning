@@ -1,20 +1,58 @@
-/**
- * File header comes here
- *
- */
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: JunglePark 2000
+// Files: JunglePark.java, ParkGUI.java, Animal.java, Tiger.java, Deer.java, Button.java,
+// AddAnimalButton.java, ClearButton.java, JungleParkTests.java
+// Course: Comp Sci 300, Fall, 2018
+//
+// Author: Merle Zhang
+// Email: xzhang2229@wisc.edu
+// Lecturer's Name: Alexander Brooks
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
+//
+// Partner Name: NONE
+// Partner Email: NONE
+// Partner Lecturer's Name: NONE
+//
+// VERIFY THE FOLLOWING BY PLACING AN X NEXT TO EACH TRUE STATEMENT:
+// ___ Write-up states that pair programming is allowed for this assignment.
+// ___ We have both read and understand the course Pair Programming Policy.
+// ___ We have registered our team prior to the team registration deadline.
+//
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully
+// acknowledge and credit those sources of help here. Instructors and TAs do
+// not need to be credited here, but tutors, friends, relatives, room mates,
+// strangers, and others do. If you received no outside help from either type
+// of source, then please explicitly indicate NONE.
+//
+// Persons: NONE
+// Online Sources: NONE
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 import java.util.ArrayList;
-
 /**
- * Class Header comes here
+ * Class JunglePark
  * 
- * @author Mouna Kacem
+ * This class represent the JunglePark
+ * 
+ * @author Merle Zhang
+ * @version 1.0
  *
  */
 public class JunglePark extends PApplet {
-  private PImage backgroundImage; // PImage object that represents the background image
-  protected ArrayList<ParkGUI> listGUI; // ArrayList storing the current graphical objects
-                                        // (animals present in the Jungle Park and buttons)
+  /**
+   * PImage object that represents the background image
+   */
+  private PImage backgroundImage;
 
+  /**
+   * ArrayList storing the current graphical objects (animals present in the Jungle Park and
+   * buttons)
+   */
+  protected ArrayList<ParkGUI> listGUI;
 
   /**
    * CallBack method Defines initial environment properties such as screen size and to load
@@ -37,8 +75,9 @@ public class JunglePark extends PApplet {
 
     listGUI = new ArrayList<ParkGUI>(); // create the listGUI ArrayList that would store all the
     // graphic objects (animals and buttons) that would be drawn on the display window
-
-
+    listGUI.add(new AddAnimalButton("tiger", 43f, 16f, this));
+    listGUI.add(new AddAnimalButton("deer", 129f, 16f, this));
+    listGUI.add(new ClearButton(215f, 16f, this));
   }
 
   /**
@@ -48,7 +87,6 @@ public class JunglePark extends PApplet {
   public void settings() {
     size(800, 632); // sets the size of the display window to 800 x 632 pixels
   }
-
 
   /**
    * Callback method called in an infinite loop. It draws the Jungle Park's window display
@@ -111,12 +149,12 @@ public class JunglePark extends PApplet {
         listGUI.add(new Deer(this));
         break;
     }
-
   }
 
   /**
    * Removes all the animals from the park
    */
+  @Override
   public void clear() {
     for (int i = 0; i < listGUI.size(); i++) {
       if (listGUI.get(i) instanceof Animal) {
@@ -126,12 +164,10 @@ public class JunglePark extends PApplet {
     }
   }
 
-
-
   /**
    * This main method starts the application
    * 
-   * @param args
+   * @param args arguments of main method
    */
   public static void main(String[] args) {
     // starts the application (calls PApplet main() method with the name

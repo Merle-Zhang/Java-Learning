@@ -1,9 +1,52 @@
-import java.util.ArrayList;
-
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: JunglePark 2000
+// Files: JunglePark.java, ParkGUI.java, Animal.java, Tiger.java, Deer.java, Button.java,
+// AddAnimalButton.java, ClearButton.java, JungleParkTests.java
+// Course: Comp Sci 300, Fall, 2018
+//
+// Author: Merle Zhang
+// Email: xzhang2229@wisc.edu
+// Lecturer's Name: Alexander Brooks
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
+//
+// Partner Name: NONE
+// Partner Email: NONE
+// Partner Lecturer's Name: NONE
+//
+// VERIFY THE FOLLOWING BY PLACING AN X NEXT TO EACH TRUE STATEMENT:
+// ___ Write-up states that pair programming is allowed for this assignment.
+// ___ We have both read and understand the course Pair Programming Policy.
+// ___ We have registered our team prior to the team registration deadline.
+//
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully
+// acknowledge and credit those sources of help here. Instructors and TAs do
+// not need to be credited here, but tutors, friends, relatives, room mates,
+// strangers, and others do. If you received no outside help from either type
+// of source, then please explicitly indicate NONE.
+//
+// Persons: NONE
+// Online Sources: NONE
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
+/**
+ * Class JungleParkTests
+ * 
+ * This class tests the functions of JunglePark
+ * 
+ * @author Merle Zhang
+ * @version 1.0
+ *
+ */
 public class JungleParkTests extends JunglePark {
 
-  private static JunglePark park; // PApplet object that represents the display
-                                  // window of this program
+  /**
+   * PApplet object that represents the display window of this program
+   */
+  private static JunglePark park;
 
   /**
    * This method checks whether isClose() called by a Deer returns true if a tiger is within its
@@ -14,8 +57,6 @@ public class JungleParkTests extends JunglePark {
    */
   public static boolean test1isCloseMethod() {
     boolean passed = true;
-
-    // This is an example. You can define your own test scenario for this method
     // Create a deer and two tigers
     Deer d = new Deer(park);
     Tiger t1 = new Tiger(park);
@@ -52,8 +93,19 @@ public class JungleParkTests extends JunglePark {
    */
   public static boolean test2isCloseMethod() {
     boolean passed = true;
-    // TODO Define your test scenario here
-
+    // Create two tigers
+    Tiger t1 = new Tiger(park);
+    Tiger t2 = new Tiger(park);
+    // Set first tiger at position(200,200)
+    t1.setPositionX(200);
+    t1.setPositionY(200);
+    // Set second tiger at position(400,200)
+    t2.setPositionX(400); // tiger2 is 200px away from tiger1
+    t2.setPositionY(200);
+    if (t1.isClose(t2, 100)) { // bug! isClose() should return false here
+      System.out.println("Tiger's isClose is returning true when it should return false.");
+      passed = false;
+    }
 
     /////////////////////////////////////
     park.listGUI.clear(); // clear all the content of listGUI to get ready for a next scenario
@@ -68,8 +120,21 @@ public class JungleParkTests extends JunglePark {
    */
   public static boolean test1DeerScanForThreatMethod() {
     boolean passed = true;
-    // TODO Define your test scenario here
-
+    // Create a deer and two tigers
+    Deer d = new Deer(park);
+    Tiger t = new Tiger(park);
+    // Set deer at position(200,200)
+    d.setPositionX(200);
+    d.setPositionY(200);
+    // Set tiger at position(300,200)
+    t.setPositionX(300); // tiger is 100px away from deer
+    t.setPositionY(200);
+    park.listGUI.add(d);
+    park.listGUI.add(t);
+    if (!d.scanForThreat(175)) { // bug! isClose() should return true here
+      System.out.println("Deer's scanForThreat is returning false when it should return true.");
+      passed = false;
+    }
 
     /////////////////////////////////////
     park.listGUI.clear(); // clear all the content of listGUI to get ready for a next scenario
@@ -85,8 +150,21 @@ public class JungleParkTests extends JunglePark {
    */
   public static boolean test2DeerScanForThreatMethod() {
     boolean passed = true;
-    // TODO Define your test scenario here
-
+    // Create a deer and two tigers
+    Deer d = new Deer(park);
+    Tiger t = new Tiger(park);
+    // Set deer at position(200,200)
+    d.setPositionX(200);
+    d.setPositionY(200);
+    // Set first tiger at position(400,200)
+    t.setPositionX(400); // tiger is 200px away from deer
+    t.setPositionY(200);
+    park.listGUI.add(d);
+    park.listGUI.add(t);
+    if (d.scanForThreat(175)) { // bug! isClose() should return false here
+      System.out.println("Deer's scanForThreat is returning true when it should return false.");
+      passed = false;
+    }
 
     /////////////////////////////////////
     park.listGUI.clear(); // clear all the content of listGUI to get ready for a next scenario
@@ -143,7 +221,7 @@ public class JungleParkTests extends JunglePark {
   /**
    * runs JungleParkTests program as a PApplet client
    * 
-   * @param args
+   * @param args arguments of the main methods
    */
   public static void main(String[] args) {
     // Call PApplet.main(String className) to start this program as a PApplet client application
@@ -161,15 +239,12 @@ public class JungleParkTests extends JunglePark {
     super.setup(); // calls the setup() method defined
     park = this; // set the park to the current instance of Jungle
 
-    // TODO Call your test methods here
     System.out.println("test1isCloseMethod(): " + test1isCloseMethod());
+    System.out.println("test2isCloseMethod(): " + test2isCloseMethod());
+    System.out.println("test1DeerScanForThreatMethod(): " + test1DeerScanForThreatMethod());
+    System.out.println("test2DeerScanForThreatMethod(): " + test2DeerScanForThreatMethod());
     System.out.println("testTigerHopMethod(): " + testTigerHopMethod());
-
     // close PApplet display window (No need for the graphic mode for these tests)
     park.exit();
-
   }
-
-
-
 }
