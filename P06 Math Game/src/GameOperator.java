@@ -17,6 +17,8 @@ public class GameOperator {
       new GameOperator('x'), // multiplication
       new GameOperator('/'), // division
       new GameOperator('&'), // concatenation
+      new GameOperator('^'), // concatenation
+
   }); // list of all available GameOperators objects (note the private constructor below)
   private char operator; // the character ID used to distinguish this GameOperator from others
 

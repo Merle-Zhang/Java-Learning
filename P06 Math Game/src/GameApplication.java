@@ -31,6 +31,7 @@
 // Online Sources: NONE
 //
 /////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
+import java.security.AllPermission;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -66,7 +67,7 @@ public class GameApplication {
 
     while (true) {
       System.out.print("Goal: " + target + " Moves Taken: " + moves + "\n" + "Puzzle: " + list
-          + "\n" + "Number and Operation [+, -, x, /, &] to Apply: ");
+          + "\n" + "Number and Operation " + GameOperator.ALL_OPERATORS + " to Apply: ");
       input = sc.nextLine().trim(); // remove spaces in front and end
 
       if (input.toLowerCase().equals("quit"))
