@@ -132,9 +132,44 @@ public class Canvas {
     return str;
   }
 
-  public static void main(String[] args) {
-    // TODO Auto-generated method stub
+  /**
+   * Accessor of drawingArray
+   * @return the drawingArray
+   */
+  public char[][] getDrawingArray() {
+    return drawingArray;
+  }
 
+  /**
+   * Mutator 
+   * @param drawingArray
+   */
+  public void setDrawingArray(char[][] drawingArray) {
+    this.drawingArray = drawingArray;
+  }
+
+  public int getWidth() {
+    return width;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
+  public DrawingStack getUndoStack() {
+    return undoStack;
+  }
+
+  public DrawingStack getRedoStack() {
+    return redoStack;
+  }
+
+  public void printDrawing() {
+    System.out.println(this);
+  }
+  
+  public void printHistory() {
+    
   }
 
 }
