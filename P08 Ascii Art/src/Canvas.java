@@ -1,10 +1,43 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: ASCII Art
+// Files: Canvas.java AsciiTest.java DrawingChange.java AsciiArt.java DrawingStack.java DrawingStackIterator.java 
+// Course: Comp Sci 300, Fall, 2018
+//
+// Author: Merle Zhang
+// Email: xzhang2229@wisc.edu
+// Lecturer's Name: Alexander Brooks
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
+//
+// Partner Name: NONE
+// Partner Email: NONE
+// Partner Lecturer's Name: NONE
+//
+// VERIFY THE FOLLOWING BY PLACING AN X NEXT TO EACH TRUE STATEMENT:
+// ___ Write-up states that pair programming is allowed for this assignment.
+// ___ We have both read and understand the course Pair Programming Policy.
+// ___ We have registered our team prior to the team registration deadline.
+//
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully
+// acknowledge and credit those sources of help here. Instructors and TAs do
+// not need to be credited here, but tutors, friends, relatives, room mates,
+// strangers, and others do. If you received no outside help from either type
+// of source, then please explicitly indicate NONE.
+//
+// Persons: NONE
+// Online Sources: NONE
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
 /**
  * Canvas.java
  * 
  * @author Merle Zhang
  * @date 11.7.18
  */
-
+import java.util.Iterator;
 
 /**
  * Class representing an ASCII-art image
@@ -73,12 +106,13 @@ public class Canvas {
    * @param c   the character we want to draw
    */
   public void draw(int row, int col, char c) {
-    if (row < 0 || row >= this.height || col < 0 || col >= this.width)
+    if (row < 0 || row >= this.height || col < 0 || col >= this.width) // the drawing position is
+                                                                       // outside the canvas
       throw new IllegalArgumentException();
-    char prev = drawingArray[row][col];
-    drawingArray[row][col] = c;
-    undoStack.push(new DrawingChange(col, row, prev, c));
-    while (!redoStack.isEmpty())
+    char prev = drawingArray[row][col]; // store the previous character
+    drawingArray[row][col] = c; // write the new character
+    undoStack.push(new DrawingChange(col, row, prev, c)); // push the change to undoStack
+    while (!redoStack.isEmpty()) // clear redoStack
       redoStack.pop();
   }
 
@@ -91,9 +125,10 @@ public class Canvas {
   public boolean undo() {
     if (undoStack.isEmpty())
       return false;
-    DrawingChange recent = undoStack.pop();
-    draw(recent.y, recent.x, recent.prevChar);
-    redoStack.push(recent);
+    DrawingChange recent = undoStack.pop(); // store the most recent one
+    drawingArray[recent.y][recent.x] = recent.prevChar; // rewrite the most recent one
+    // Note: don't use draw() since the operation about stacks will mass up the whole progress
+    redoStack.push(recent); // push the most recent one into redoStack
     return true;
   }
 
@@ -107,10 +142,11 @@ public class Canvas {
   public boolean redo() {
     if (redoStack.isEmpty())
       return false;
-    DrawingChange recent = redoStack.pop();
-    draw(recent.y, recent.x, recent.newChar);
-    undoStack.push(recent);
-    return false;
+    DrawingChange recent = redoStack.pop(); // store the most recent one
+    drawingArray[recent.y][recent.x] = recent.newChar; // rewrite the most recent one
+    // Note: don't use draw() since the operation about stacks will mass up the whole progress
+    undoStack.push(recent); // push the most recent one into redoStack
+    return true;
   }
 
   /**
@@ -122,18 +158,43 @@ public class Canvas {
     String str = "";
     for (char[] row : drawingArray) {
       for (char pos : row) {
-        if (pos == ' ')
+        if (pos == ' ') // if space, change to _
           str += "_";
         else
           str += pos;
       }
-      str += System.lineSeparator();
+      str += System.lineSeparator(); // lineSeparator for different OS
     }
     return str;
   }
 
   /**
+   * Print the Canvas's string representation to System.out
+   */
+  public void printDrawing() {
+    System.out.println(this); // call toString()
+  }
+
+  /**
+   * Print a record of the changes that are stored on the undoStack
+   */
+  public void printHistory() {
+    int size = undoStack.size(); // the number of the operation
+    Iterator<DrawingChange> itr = undoStack.iterator(); // iterator through undoStack
+    DrawingChange change; // store the change
+    while (itr.hasNext()) {
+      change = itr.next();
+      System.out.println(
+          (size--) + ". draw \'" + change.newChar + "\' on (" + change.x + "," + change.y + ")");
+    }
+  }
+
+
+  // Set of optional accessors and mutators
+
+  /**
    * Accessor of drawingArray
+   * 
    * @return the drawingArray
    */
   public char[][] getDrawingArray() {
@@ -141,35 +202,47 @@ public class Canvas {
   }
 
   /**
-   * Mutator 
-   * @param drawingArray
+   * Mutator of drawingArray
+   * 
+   * @param drawingArray new drawingArray
    */
   public void setDrawingArray(char[][] drawingArray) {
     this.drawingArray = drawingArray;
   }
 
+  /**
+   * Accessor of width
+   * 
+   * @return the width
+   */
   public int getWidth() {
     return width;
   }
 
+  /**
+   * Accessor of height
+   * 
+   * @return the height
+   */
   public int getHeight() {
     return height;
   }
 
+  /**
+   * Accessor of undoStack
+   * 
+   * @return the undoStack
+   */
   public DrawingStack getUndoStack() {
     return undoStack;
   }
 
+  /**
+   * Accessor of redoStack
+   * 
+   * @return the redoStack
+   */
   public DrawingStack getRedoStack() {
     return redoStack;
   }
-
-  public void printDrawing() {
-    System.out.println(this);
-  }
-  
-  public void printHistory() {
-    
-  }
-
 }
