@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * The Process Scheduler
  * 
@@ -66,8 +68,23 @@ public class ProcessScheduler {
 
   }
 
+  /**
+   * The main method
+   * 
+   * @param args arguments
+   */
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
+    Scanner sc = new Scanner(System.in);
+    ProcessScheduler psr = new ProcessScheduler();
+    start(sc, psr);
+  }
+
+
+  public static void start(Scanner sc, ProcessScheduler psr) {
+    
+  }
+
+  public static void processInput(String input) {
 
   }
 
