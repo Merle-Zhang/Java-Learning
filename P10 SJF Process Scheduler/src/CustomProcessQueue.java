@@ -1,3 +1,44 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title: ProcessScheduler
+// Files: ProcessScheduler.java WaitingQueueADT.java CustomProcess.java CustomProcessQueue.java 
+//          ProcessSchedulerTests.java
+// Course: Comp Sci 300, Fall, 2018
+//
+// Author: Merle Zhang
+// Email: xzhang2229@wisc.edu
+// Lecturer's Name: Alexander Brooks
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
+//
+// Partner Name: NONE
+// Partner Email: NONE
+// Partner Lecturer's Name: NONE
+//
+// VERIFY THE FOLLOWING BY PLACING AN X NEXT TO EACH TRUE STATEMENT:
+// ___ Write-up states that pair programming is allowed for this assignment.
+// ___ We have both read and understand the course Pair Programming Policy.
+// ___ We have registered our team prior to the team registration deadline.
+//
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully
+// acknowledge and credit those sources of help here. Instructors and TAs do
+// not need to be credited here, but tutors, friends, relatives, room mates,
+// strangers, and others do. If you received no outside help from either type
+// of source, then please explicitly indicate NONE.
+//
+// Persons: NONE
+// Online Sources: NONE
+//
+/////////////////////////////// 80 COLUMNS WIDE ///////////////////////////////
+/**
+ * CustomProcessQueue.java
+ * 
+ * @author Merle Zhang
+ * @date 12.5.18
+ */
+
 /**
  * The class represents the CustomProcess Queue
  * 
@@ -55,12 +96,12 @@ public class CustomProcessQueue implements WaitingQueueADT<CustomProcess> {
     CustomProcess minNode;
     int minIndex;
 
-    while (childIndex < this.size) {
+    while (childIndex < this.size + 1) {
       // Find the min among the node and all the node's children
       curNode = heap[index];
       minNode = curNode;
       minIndex = index;
-      for (int i = 0; i < 2 && (i + childIndex) < this.size; i++) {
+      for (int i = 0; i < 2 && (i + childIndex) < this.size + 1; i++) {
         if (heap[i + childIndex].compareTo(minNode) < 0) {
           minNode = heap[i + childIndex];
           minIndex = i + childIndex;
@@ -167,7 +208,5 @@ public class CustomProcessQueue implements WaitingQueueADT<CustomProcess> {
   public static int getInitialCapacity() {
     return INITIAL_CAPACITY;
   }
-
-
 
 }
