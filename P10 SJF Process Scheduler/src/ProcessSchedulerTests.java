@@ -56,9 +56,9 @@ public class ProcessSchedulerTests {
     try {
       CustomProcessQueue queue = new CustomProcessQueue();
       queue.enqueue(new CustomProcess(5));
-      queue.enqueue(new CustomProcess(10));
       queue.enqueue(new CustomProcess(3));
       queue.enqueue(new CustomProcess(3));
+      queue.enqueue(new CustomProcess(7));
       CustomProcess[] heap = queue.getHeap();
       return heap[1].compareTo(heap[2]) <= 0 && heap[1].compareTo(heap[3]) <= 0
           && heap[2].compareTo(heap[4]) <= 0;
@@ -76,12 +76,12 @@ public class ProcessSchedulerTests {
     try {
       CustomProcessQueue queue = new CustomProcessQueue();
       queue.enqueue(new CustomProcess(5));
-      queue.enqueue(new CustomProcess(10));
       queue.enqueue(new CustomProcess(3));
       queue.enqueue(new CustomProcess(3));
+      queue.enqueue(new CustomProcess(7));
       CustomProcess[] heap = queue.getHeap();
-      return queue.dequeue().getProcessId() == 7 && queue.dequeue().getProcessId() == 8
-          && queue.dequeue().getProcessId() == 5 && queue.dequeue().getProcessId() == 6
+      return queue.dequeue().getProcessId() == 6 && queue.dequeue().getProcessId() == 7
+          && queue.dequeue().getProcessId() == 5 && queue.dequeue().getProcessId() == 8
           && heap[1] == null && heap[2] == null;
     } catch (Exception e) {
       return false;
